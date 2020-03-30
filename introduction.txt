@@ -1,0 +1,5 @@
+title = {{SDM-NET}: Deep Generative Network for Structured Deformable Mesh}
+
+author = {Gao, Lin and Yang, Jie and Wu, Tong and Yuan, Yu-Jie and Fu, Hongbo and Lai, Yu-Kun and Zhang, Hao(Richard)}
+
+os={Linux, Windows}
