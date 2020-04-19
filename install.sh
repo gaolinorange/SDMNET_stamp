@@ -1,4 +1,3 @@
-
 # Create a virtual environment 
 virtualenv --no-site-packages -p python3 ~/sdmnet
 
@@ -8,7 +7,7 @@ source ~/sdmnet/bin/activate
 # Update pip
 pip install -U pip
 
-# download pymesh
+# download pymesh binary
 mkdir package
 wget https://github.com/PyMesh/PyMesh/releases/download/v0.2.1/pymesh2-0.2.1-cp36-cp36m-linux_x86_64.whl
 mv pymesh2-0.2.1-cp36-cp36m-linux_x86_64.whl ./package/pymesh2-0.2.1-cp36-cp36m-linux_x86_64.whl
@@ -24,5 +23,7 @@ pip install scikit-learn==0.21.2
 pip install ./package/pymesh2-0.2.1-cp36-cp36m-linux_x86_64.whl
 pip install numpy==1.16.0
 
+pip install openmesh
+pip install trimesh
 echo "installing sucessfully"
 

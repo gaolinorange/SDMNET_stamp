@@ -1,5 +1,7 @@
 # Deep Generative Network for Structured Deformable Mesh
 
+![](./teaser.jpg)
+
 ## Goal
 
 Propose a deep generative network to explore shape collections, which can be used for interpolation, generation, and editing.
@@ -32,8 +34,25 @@ Given a collection of shapes of the same category with part-level labels, our me
 
 ## Data and Checkpoint
 
-All the [data]() and [checkpoint]() used to reproduce the result is stored in google drive. Links are also available in `data_checkpoint_link.txt`. Save the two zip files in current directory. Then execute:
+All the [data](https://drive.google.com/file/d/1myWnHmuk2XD7lyHJL7KAgok89DT7SETF/view?usp=sharing) and [checkpoint](https://drive.google.com/file/d/1ItmG9tQ7vEE31anDU_z2yER2Wdon9_Ez/view?usp=sharing) used to reproduce the result is stored in google drive. Links are also available in `data_checkpoint_link.txt`. Save the two zip files in current directory. 
 
+After downloading the data and checkpoint, the directory tree looks like this:
+
+```txt
+── SDMNET_stamp
+   ├── checkpoint
+   ├── code
+   ├── data
+   ├── data_checkpoint_link.txt
+   ├── install.sh
+   ├── liability form.pdf
+   ├── introduction.txt
+   ├── mvdata.sh
+   ├── README.md
+   └── teaser.jpg
+```
+
+Then execute:
 ```sh
 unzip data.zip
 cp ./data/chair* ./code/python/chair_reproduce
@@ -41,23 +60,7 @@ cp ./data/plane* ./code/python/plane_reproduce
 
 unzip checkpoint.zip
 mv ./checkpoint/05060123_6863bin_1-joint_1-l0_100.0-l2_10.0-l3_1.0-l4_0.001-model_chair-trcet_1.0 ./code/python/chair_reproduce
-
 mv ./checkpoint/05050238_2556bin_0-joint_0-l0_100.0-l2_10.0-l3_1.0-l4_0.001-model_plane-trcet_1.0 ./code/python/plane_reproduce
-```
-
-After downloading and moving the data and checkpoint, the directory tree looks like this:
-
-```txt
-── SDMNETStamp
-   ├── SubmissionRequirements.md
-   ├── checkpoint
-   ├── code
-   ├── data
-   ├── data_checkpoint_link.txt
-   ├── install.sh
-   ├── introduction.txt
-   ├── mvdata.sh
-   └── reproduce.md
 ```
 
 ## Reproduce
@@ -89,14 +92,14 @@ After downloading and moving the data and checkpoint, the directory tree looks l
    Open those meshes in meshlab and you will see the reproduced results for **Fig.1** in the original paper. (**NOTE**: Some parts' faces might have wrong normals, use **double face** mode for beter visualization)
 
 ## Citation
-
 If you found this code useful please cite our work as:
-&nbsp;&nbsp;&nbsp;&nbsp;@article {gaosdmnet2019,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author = {Gao, Lin and Yang, Jie and Wu, Tong and Yuan, Yu-Jie and Fu, Hongbo and Lai, Yu-Kun and Zhang, Hao(Richard)},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title = {{SDM-NET}: Deep Generative Network for Structured Deformable Mesh},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;journal = {ACM Transactions on Graphics (Proceedings of ACM SIGGRAPH Asia 2019)},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year = {2019},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;volume = 38,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pages = {243:1--243:15},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number = 6 
+
+&nbsp;&nbsp;&nbsp;&nbsp;@article{gaosdmnet2019,  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author = {Gao, Lin and Yang, Jie and Wu, Tong and Yuan, Yu-Jie and Fu, Hongbo and Lai, Yu-Kun and Zhang, Hao(Richard)},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title = {{SDM-NET}: Deep Generative Network for Structured Deformable Mesh},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;journal = {ACM Transactions on Graphics (Proceedings of ACM SIGGRAPH Asia 2019)},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year = {2019},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;volume = 38,  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pages = {243:1--243:15},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number = 6  
 &nbsp;&nbsp;&nbsp;&nbsp;}
