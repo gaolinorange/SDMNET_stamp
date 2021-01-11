@@ -125,7 +125,19 @@ function [total_pc, total_face, total_optimized_pc, total_optimized_face] = Reco
             y_order(i, 2) = inf;
         end
     end
-
+    for i = 1:n
+        if strcmp('chair', type) == 1 && i <= 7
+            if ~isempty(part_pcs{i})
+                part_pcs{i} = part_pcs{i} + 1.5*get_direction(part_pcs{8}, part_pcs{i});
+                part_bbox = GetBoundingBox4PointCloud(part_pcs{i});
+                q0(i, :) = 1/2*(part_bbox(7, :) - part_bbox(1, :));
+                p0(i, :) = 1/2*(part_bbox(7, :) + part_bbox(1, :));
+                y_order(i, 1) = i;
+                y_order(i, 2) = part_bbox(1, 2);
+            end
+        end
+    end
+    
     N = 6*n+2*n*n;
     x0 = zeros(N, 1);
     x = zeros(N, 1);
@@ -567,22 +579,45 @@ function [total_pc, total_face, total_optimized_pc, total_optimized_face] = Reco
     % b = [b; beq];
     
 %     tic;
-    % [x, fval]= quadprog(H,f, A, b,Aeq,beq);
+    [x, fval]= quadprog(H,f, A, b,Aeq,beq);
     % Opt = opti('qp', H, f, 'ineq', A, b, 'xtype', xtype);
     % [x,fval,exitflag,info] = solve(Opt);
-    Prob = miqpAssign(H, f, A, lb, b, [], [], x0, ...
-        IntVars, [], [], [], ...
-        'name', [], [], ...
-        [], [], [], []);
-    Result = tomRun('gurobi', Prob, 1);
-    x = Result.x_k;
+%     Prob = miqpAssign(H, f, A, lb, b, [], [], x0, ...
+%         IntVars, [], [], [], ...
+%         'name', [], [], ...
+%         [], [], [], []);
+%     Result = tomRun('gurobi', Prob, 1);
+%     x = Result.x_k;
 %     toc;
-
+    
     for i = 1:n
-        p(i, 1:3) = x(3*i-2:3*i, 1)';
-        q(i, 1:3) = x(3*n+3*i-2:3*n+3*i, 1)';
-        if strcmp('chair', type) == 1 && i >= 4 && i <= 8
-            p(i, :) =  p(i, :).*[0.92, 1, 0.92];
+        if i ~= 3 && i~=8
+            p(i, 1:3) = x(3*i-2:3*i, 1)';
+            q(i, 1:3) = x(3*n+3*i-2:3*n+3*i, 1)';
+        end
+        if strcmp('chair', type) == 1 && i >= 4 && i <= 7
+            [local_bbox, local_bbox_face] = GetBoundingBox4PointCloud(part_pcs{8});
+%             [local_bboxi,local_bbox_facei] = GetBoundingBox4PointCloud(part_pcs{8});
+            dxyz = local_bbox(7, :) - local_bbox(1, :);
+            
+            if i == 4
+                p(i, 1) = local_bbox(1, 1)*0.9;
+%                 p(i, 2) = local_bbox(1, 2) - dxyz(2)/1.5;
+                p(i, 3) = local_bbox(1, 3)*0.9;
+            elseif i == 5
+                p(i, 1) = local_bbox(2, 1)*0.9;
+%                 p(i, 2) = local_bbox(1, 2) - dxyz(2)/1.5;
+                p(i, 3) = local_bbox(2, 3)*0.9;
+            elseif i == 6
+                p(i, 1) = local_bbox(4, 1)*0.9;
+%                 p(i, 2) = local_bbox(1, 2) - dxyz(2)/1.5;
+                p(i, 3) = local_bbox(4, 3)*0.9;
+            elseif i == 7
+                p(i, 1) = local_bbox(3, 1)*0.9;
+%                 p(i, 2) = local_bbox(1, 2) - dxyz(2)/1.5;
+                p(i, 3) = local_bbox(3, 3)*0.9;
+            end
+%             p(i, :) = p(i, :) + get_direction(part_pcs{8}, part_pcs{i});
         end
     end
     
@@ -590,11 +625,17 @@ function [total_pc, total_face, total_optimized_pc, total_optimized_face] = Reco
     total_pc = [];
     total_face = [];
     for i = 1:n
+        
         if ~isempty(part_pcs{i})
-            optimized_pc = part_pcs{i} - mean(part_pcs{i}, 1) + p(i, :);
+            if strcmp('chair', type) == 1 && i~=3 && i ~= 8
+                optimized_pc = part_pcs{i} - mean(part_pcs{i}, 1) + p(i, :);
+            else
+                optimized_pc = part_pcs{i};
+            end
             total_pc = [total_pc; part_pcs{i}];
             total_face = AddPartFace2TotalFace(total_face, part_faces{i});
             total_optimized_pc = [total_optimized_pc; optimized_pc];
+        
         end
     end
     total_optimized_face = total_face;
