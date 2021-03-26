@@ -82,12 +82,10 @@ mv ./checkpoint/05050238_2556bin_0-joint_0-l0_100.0-l2_10.0-l3_1.0-l4_0.001-mode
    Open `./code/matlab` in MATLAB. Execute following commands.
 
    ```matlab
-   GetOptimizedObj('../python/plane_reproduce/05050238_2556bin_0-joint_0-l0_100.0-l2_10.0-l3_1.0-l4_0.001-model_plane-trcet_1.0/interpolation80000', 'plane', 2, 0, 0)
-    
-   GetOptimizedObj('../python/chair_reproduce/05060123_6863bin_1-joint_1-l0_100.0-l2_10.0-l3_1.0-l4_0.001-model_chair-trcet_1.0/interpolation100000', 'chair', 2, 0, 0)
+       GetOptimizedObj('../python/chair_reproduce/05060123_6863bin_1-joint_1-l0_100.0-l2_10.0-l3_1.0-l4_0.001-model_chair-trcet_1.0/interpolation100000', 'chair', 2, 0, 0)
    ```
 
-   The output meshes are in `../python/plane_reproduce/05050238_2556bin_0-joint_0-l0_100.0-l2_10.0-l3_1.0-l4_0.001-model_plane-trcet_1.0/interpolation80000` and `../python/chair_reproduce/05060123_6863bin_1-joint_1-l0_100.0-l2_10.0-l3_1.0-l4_0.001-model_chair-trcet_1.0/interpolation100000`.
+   The output meshes are in `../python/chair_reproduce/05060123_6863bin_1-joint_1-l0_100.0-l2_10.0-l3_1.0-l4_0.001-model_chair-trcet_1.0/interpolation100000`.
 
    Open those meshes in meshlab and you will see the reproduced results for **Fig.1** in the original paper. (**NOTE**: Some parts' faces might have wrong normals, use **double face** mode for beter visualization)
 
