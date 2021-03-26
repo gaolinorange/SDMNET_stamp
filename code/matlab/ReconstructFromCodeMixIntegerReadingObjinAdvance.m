@@ -1,17 +1,15 @@
 function [total_pc, total_face, total_optimized_pc, total_optimized_face] = ReconstructFromCodeMixIntegerReadingObjinAdvance(code, part_pcs, part_faces, type)
     if strcmp(type, 'chair') == 1
-%         part_names = {'armrest1_1', 'armrest1_2', 'back', 'leg1_1', 'leg1_2', 'leg2_1', 'leg2_2', 'seat', 'armrest2_1', 'armrest2_2'};
+%         part_names = {'armrest_1', 'armrest_2', 'back', 'leg1_1', 'leg1_2', 'leg2_1', 'leg2_2', 'seat'};
         support_directions = [
-                                0, 0, 1, 0, 0, 0, 0, 1, 2, 0;
-                                0, 0, 1, 0, 0, 0, 0, 1, 0, 2;
-                                1, 1, 0, 2, 2, 2, 2, 2, 0, 0;
-                                0, 0, 2, 0, 0, 0, 0, 2, 0, 0;
-                                0, 0, 2, 0, 0, 0, 0, 2, 0, 0;
-                                0, 0, 2, 0, 0, 0, 0, 2, 0, 0;
-                                0, 0, 2, 0, 0, 0, 0, 2, 0, 0;
-                                1, 1, 2, 2, 2, 2, 2, 0, 0, 0;
-                                2, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-                                0, 2, 0, 0, 0, 0, 0, 0, 0, 0;
+                                0, 0, 1, 0, 0, 0, 0, 1;
+                                0, 0, 1, 0, 0, 0, 0, 1;
+                                1, 1, 0, 2, 2, 2, 2, 2;
+                                0, 0, 2, 0, 0, 0, 0, 2;
+                                0, 0, 2, 0, 0, 0, 0, 2;
+                                0, 0, 2, 0, 0, 0, 0, 2;
+                                0, 0, 2, 0, 0, 0, 0, 2;
+                                1, 1, 2, 2, 2, 2, 2, 0;
                             ];
     elseif strcmp(type, 'knife') == 1
 %         part_names = {'part1', 'part2'};
