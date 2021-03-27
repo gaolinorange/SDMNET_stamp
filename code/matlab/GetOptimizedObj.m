@@ -88,7 +88,7 @@ function GetOptimizedObj(recon_inter_random_dir, type, recon_inter_random, use_s
                 if ispc
                     [part_pc, part_face] = cotlp(obj_filename);
                 else
-                    [part_pc, part_face] = readObj(obj_filename);
+                    [part_pc, part_face] = readOBJ(obj_filename);
                     part_face = part_face';
                 end
                 part_pcs{j} = part_pc;
