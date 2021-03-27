@@ -595,7 +595,7 @@ function [total_pc, total_face, total_optimized_pc, total_optimized_face] = Reco
             p(i, 1:3) = x(3*i-2:3*i, 1)';
             q(i, 1:3) = x(3*n+3*i-2:3*n+3*i, 1)';
         end
-        if strcmp('chair', type) == 1 && i >= 4 && i <= 7
+        if strcmp('chair', type) == 1 && ((i >= 4) && (i <= 7) || i <= 2)
             [local_bbox, local_bbox_face] = GetBoundingBox4PointCloud(part_pcs{8});
 %             [local_bboxi,local_bbox_facei] = GetBoundingBox4PointCloud(part_pcs{8});
             dxyz = local_bbox(7, :) - local_bbox(1, :);
@@ -616,6 +616,14 @@ function [total_pc, total_face, total_optimized_pc, total_optimized_face] = Reco
                 p(i, 1) = local_bbox(3, 1)*0.9;
 %                 p(i, 2) = local_bbox(1, 2) - dxyz(2)/1.5;
                 p(i, 3) = local_bbox(3, 3)*0.9;
+            elseif i == 1
+                p(i, 1) = local_bbox(3, 1);
+                p(i, 2) = (local_bbox(1, 2)*0.3+local_bbox(5, 2)*0.7);
+                p(i, 3) = (local_bbox(1, 3)+local_bbox(3, 3))/2;
+            elseif i == 2
+                p(i, 1) = local_bbox(1, 1);
+                p(i, 2) = (local_bbox(1, 2)*0.3+local_bbox(5, 2)*0.7);
+                p(i, 3) = (local_bbox(1, 3)+local_bbox(3, 3))/2;
             end
 %             p(i, :) = p(i, :) + get_direction(part_pcs{8}, part_pcs{i});
         end
